@@ -20,6 +20,10 @@ function initializeApp() {
     console.log("channel_id:", senderId);
   });
 
+  socket.on("damage", () => {
+    hurtCastle("left");
+  });
+
   renderCastles("misterhup", "Atrioc");
 
   // Handle connection and disconnection events
@@ -57,6 +61,21 @@ function renderCastles(name1, name2) {
   container.appendChild(rightCastle);
   container.appendChild(leftName);
   container.appendChild(rightName);
+}
+
+function hurtCastle(side) {
+  const castle = document.querySelector(`.castle-${side}`);
+  const originalSrc = castle.src;
+
+  // Add shake class and change to red castle
+  castle.classList.add("shake");
+  castle.src = "castle_piskel_red.png";
+
+  // Remove shake class and revert image after 1 second
+  setTimeout(() => {
+    castle.classList.remove("shake");
+    castle.src = originalSrc;
+  }, 1000);
 }
 
 function spawnAnimatedGifWithText(attack) {

@@ -78,3 +78,12 @@ body, html {
     100% { left: calc(100% - 128px - 70px); }
   }
   
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.2s ease-in-out 3;
+}
