@@ -20,6 +20,8 @@ function initializeApp() {
     console.log("channel_id:", senderId);
   });
 
+  renderCastles("misterhup", "Atrioc");
+
   // Handle connection and disconnection events
   socket.on("connect", () => {
     console.log("Connected to the server");
@@ -28,6 +30,33 @@ function initializeApp() {
   socket.on("disconnect", () => {
     console.log("Disconnected from the server");
   });
+}
+
+function renderCastles(name1, name2) {
+  // Create left castle and name
+  const leftCastle = document.createElement("img");
+  leftCastle.src = "castle_piskel.png";
+  leftCastle.classList.add("castle", "castle-left");
+
+  const leftName = document.createElement("div");
+  leftName.textContent = name1;
+  leftName.classList.add("player-name", "player-name-left");
+
+  // Create right castle and name
+  const rightCastle = document.createElement("img");
+  rightCastle.src = "castle_piskel.png";
+  rightCastle.classList.add("castle", "castle-right");
+
+  const rightName = document.createElement("div");
+  rightName.textContent = name2;
+  rightName.classList.add("player-name", "player-name-right");
+
+  // Add to container
+  const container = document.getElementById("container");
+  container.appendChild(leftCastle);
+  container.appendChild(rightCastle);
+  container.appendChild(leftName);
+  container.appendChild(rightName);
 }
 
 function spawnAnimatedGifWithText(attack) {
