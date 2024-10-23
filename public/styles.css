@@ -14,7 +14,7 @@ body, html {
   /* Style for the text and GIF container */
   .animatedContainer {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 60px;
     width: 100px;
     text-align: center;
@@ -37,7 +37,7 @@ body, html {
 
   .castle {
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     height: auto;
   }
 
@@ -52,7 +52,7 @@ body, html {
 
   .player-name {
       position: fixed;
-      bottom: 100px;
+      bottom: 140px;
       color: white;
       font-size: 20px;
       transform-origin: bottom left;
@@ -70,6 +70,23 @@ body, html {
       font-size: 40px;
       transform: rotate(90deg);
       transform-origin: center;
+  }
+
+  .health-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      height: 20px;
+      border: 8px solid #1a2f3e;
+      background-color: #ff4242;
+  }
+
+  .health-progress {
+      height: 100%;
+      width: 0%;
+      background-color: #ffb742;
+      transition: width 0.3s ease-in-out;
   }
     
   /* Define the keyframes for the container's movement */

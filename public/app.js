@@ -25,6 +25,7 @@ function initializeApp() {
   });
 
   renderCastles("misterhup", "Atrioc");
+  addHealthBar(60);
 
   // Handle connection and disconnection events
   socket.on("connect", () => {
@@ -76,6 +77,40 @@ function hurtCastle(side) {
     castle.classList.remove("shake");
     castle.src = originalSrc;
   }, 1000);
+
+  updateHealthBar(35);
+}
+
+function addHealthBar(leftPercentage) {
+  // Remove existing health bar if any
+  const existingBar = document.querySelector(".health-bar");
+  if (existingBar) {
+    existingBar.remove();
+  }
+
+  // Create the main health bar container
+  const healthBar = document.createElement("div");
+  healthBar.classList.add("health-bar");
+
+  // Create the progress element
+  const healthProgress = document.createElement("div");
+  healthProgress.classList.add("health-progress");
+
+  // Set the width based on the percentage
+  healthProgress.style.width = `${leftPercentage}%`;
+
+  // Assemble and add to the document
+  healthBar.appendChild(healthProgress);
+  document.getElementById("container").appendChild(healthBar);
+}
+
+function updateHealthBar(newPercentage) {
+  const currentBar = document.querySelector(".health-progress");
+  if (currentBar) {
+    currentBar.style.width = `${newPercentage}%`;
+  } else {
+    addHealthBar(newPercentage);
+  }
 }
 
 function spawnAnimatedGifWithText(attack) {
