@@ -1,13 +1,12 @@
 const avatarMap = new Map([
-  [1, "/avatars/walker.gif"],
-  [2, "/avatars/ufo.gif"],
+  [1, "/avatars/spear.gif"],
+  [2, "/avatars/ball.gif"],
   [3, "/avatars/walker.gif"],
-  [4, "/avatars/walker.gif"],
-  [5, "/avatars/walker.gif"],
-  [6, "/avatars/walker.gif"],
-  [7, "/avatars/walker.gif"],
-  [8, "/avatars/walker.gif"],
-  [9, "/avatars/walker.gif"],
+  [4, "/avatars/bomber.gif"],
+  [5, "/avatars/bat.gif"],
+  [6, "/avatars/ufo.gif"],
+  [7, "/avatars/slug.gif"],
+  [8, "/avatars/glizzy.gif"],
 ]);
 
 export function getAvatarPath(id) {
