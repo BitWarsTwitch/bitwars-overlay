@@ -94,6 +94,11 @@ body, html {
     0% { left: 70px; }
     100% { left: calc(100% - 128px - 70px); }
   }
+
+  @keyframes moveLeft {
+    0% { right: 70px; }
+    100% { right: calc(100% - 128px - 70px); }
+  }
   
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

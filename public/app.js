@@ -13,15 +13,13 @@ function initializeApp() {
 
   // Listen for the "attack" event
   socket.on("attack", (attack) => {
-    if (attack.channel_id === senderId) {
-      console.log("Received new attack for this channel:", attack);
-      spawnAnimatedGifWithText(attack);
-    }
+    console.log("Received new attack for this channel:", attack);
+    spawnAnimatedGifWithText(attack);
     console.log("channel_id:", senderId);
   });
 
-  socket.on("damage", () => {
-    hurtCastle("left");
+  socket.on("damage", (damage) => {
+    hurtCastle(damage.side, damage.damage);
   });
 
   renderCastles("misterhup", "Atrioc");
@@ -64,9 +62,9 @@ function renderCastles(name1, name2) {
   container.appendChild(rightName);
 }
 
-function hurtCastle(side) {
+function hurtCastle(side, damage) {
   const castle = document.querySelector(`.castle-${side}`);
-  const originalSrc = castle.src;
+  const originalSrc = "castle_piskel.png";
 
   // Add shake class and change to red castle
   castle.classList.add("shake");
@@ -76,9 +74,9 @@ function hurtCastle(side) {
   setTimeout(() => {
     castle.classList.remove("shake");
     castle.src = originalSrc;
-  }, 1000);
+  }, 500);
 
-  updateHealthBar(35);
+  updateHealthBar(-damage);
 }
 
 function addHealthBar(leftPercentage) {
@@ -104,38 +102,48 @@ function addHealthBar(leftPercentage) {
   document.getElementById("container").appendChild(healthBar);
 }
 
-function updateHealthBar(newPercentage) {
+function updateHealthBar(change) {
   const currentBar = document.querySelector(".health-progress");
   if (currentBar) {
-    currentBar.style.width = `${newPercentage}%`;
+    const currentWidth = parseFloat(currentBar.style.width);
+    const newWidth = Math.max(0, Math.min(100, currentWidth + change));
+    currentBar.style.width = `${newWidth}%`;
   } else {
-    addHealthBar(newPercentage);
+    addHealthBar(100 + change);
   }
 }
 
 function spawnAnimatedGifWithText(attack) {
-  // Create a container for both the text and the image
   const animatedContainer = document.createElement("div");
   animatedContainer.classList.add("animatedContainer");
 
-  // Create and append the text element
+  // Set initial position and animation based on side
+  if (attack.side === "right") {
+    animatedContainer.style.right = "70px";
+    animatedContainer.style.left = "auto";
+    animatedContainer.style.animation = "moveLeft 5s linear";
+  } else {
+    animatedContainer.style.left = "70px";
+    animatedContainer.style.animation = "moveRight 5s linear";
+  }
+
   const textElement = document.createElement("div");
   textElement.classList.add("animatedText");
   textElement.innerText = attack.user_name;
 
-  // Create and append the GIF image
   const gifElement = document.createElement("img");
   gifElement.src = "walker.gif";
   gifElement.classList.add("animatedImage");
 
-  // Append both elements (text + gif) to the container
+  // Flip the GIF if moving from right to left
+  if (attack.side === "right") {
+    gifElement.style.transform = "scaleX(-1)";
+  }
+
   animatedContainer.appendChild(textElement);
   animatedContainer.appendChild(gifElement);
-
-  // Append to the main container
   container.appendChild(animatedContainer);
 
-  // Remove after 5 seconds plus random delay
   setTimeout(() => {
     container.removeChild(animatedContainer);
   }, 5000);
