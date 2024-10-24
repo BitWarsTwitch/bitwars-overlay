@@ -62,8 +62,8 @@ body, html {
       position: fixed;
       left: 20px;
       bottom: 0px;
-      transform-origin: left top;
-      transform: rotate(-90deg) translateX(50%);
+      transform-origin: left bottom;
+      transform: rotate(-90deg) translateX(50%) translateY(100%);
       font-size: 40px;
       font-family: "Pixelify Sans", sans-serif;
       font-optical-sizing: auto;
@@ -75,8 +75,8 @@ body, html {
       position: fixed;
       right: 20px;
       bottom: 0px;
-      transform-origin: right top;
-      transform: rotate(90deg) translateX(-50%);
+      transform-origin: right bottom;
+      transform: rotate(90deg) translateX(-50%) translateY(100%);
       font-size: 40px;
       font-family: "Pixelify Sans", sans-serif;
       font-optical-sizing: auto;
