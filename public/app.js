@@ -1,5 +1,6 @@
 import { getAvatarPath } from "./avatars.js";
 let isInitialized = false;
+let globalHealth = 50;
 // Function to initialize the application
 function initializeApp() {
   // Extract the sender_id from the URL
@@ -28,6 +29,7 @@ function initializeApp() {
     if (!isInitialized) {
       renderCastles(session.leftName || "Host", session.rightName || "Auto");
       addHealthBar(session.health);
+      globalHealth = session.health;
       isInitialized = true;
     }
   });
@@ -113,11 +115,11 @@ function addHealthBar(leftPercentage) {
 function updateHealthBar(change) {
   const currentBar = document.querySelector(".health-progress");
   if (currentBar) {
-    const currentWidth = parseFloat(currentBar.style.width);
-    const newWidth = Math.max(0, Math.min(100, currentWidth + change));
-    currentBar.style.width = `${newWidth}%`;
+    globalHealth = Math.max(0, Math.min(100, globalHealth + change));
+    currentBar.style.width = `${globalHealth}%`;
   } else {
-    addHealthBar(100 + change);
+    globalHealth = Math.max(0, Math.min(100, 100 + change));
+    addHealthBar(globalHealth);
   }
 }
 
