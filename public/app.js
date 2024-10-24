@@ -45,7 +45,7 @@ function initializeApp() {
 function renderCastles(name1, name2) {
   // Create left castle and name
   const leftCastle = document.createElement("img");
-  leftCastle.src = "castle_piskel.gif";
+  leftCastle.src = "castle_piskel_left.gif";
   leftCastle.classList.add("castle", "castle-left");
 
   const leftName = document.createElement("div");
@@ -54,7 +54,7 @@ function renderCastles(name1, name2) {
 
   // Create right castle and name
   const rightCastle = document.createElement("img");
-  rightCastle.src = "castle_piskel.gif";
+  rightCastle.src = "castle_piskel_right.gif";
   rightCastle.classList.add("castle", "castle-right");
 
   const rightName = document.createElement("div");
@@ -72,7 +72,7 @@ function renderCastles(name1, name2) {
 function hurtCastle(side, damage) {
   const castleSide = side === "left" ? "right" : "left";
   const castle = document.querySelector(`.castle-${castleSide}`);
-  const originalSrc = "castle_piskel.gif";
+  const originalSrc = `castle_piskel_${castleSide}.gif`;
 
   // Add shake class and change to red castle
   castle.classList.add("shake");
