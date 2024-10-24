@@ -44,7 +44,7 @@ function initializeApp() {
 function renderCastles(name1, name2) {
   // Create left castle and name
   const leftCastle = document.createElement("img");
-  leftCastle.src = "castle_piskel.png";
+  leftCastle.src = "castle_piskel.gif";
   leftCastle.classList.add("castle", "castle-left");
 
   const leftName = document.createElement("div");
@@ -53,7 +53,7 @@ function renderCastles(name1, name2) {
 
   // Create right castle and name
   const rightCastle = document.createElement("img");
-  rightCastle.src = "castle_piskel.png";
+  rightCastle.src = "castle_piskel.gif";
   rightCastle.classList.add("castle", "castle-right");
 
   const rightName = document.createElement("div");
@@ -70,19 +70,18 @@ function renderCastles(name1, name2) {
 
 function hurtCastle(side, damage) {
   const castle = document.querySelector(`.castle-${side}`);
-  const originalSrc = "castle_piskel.png";
+  const originalSrc = "castle_piskel.gif";
 
   // Add shake class and change to red castle
   castle.classList.add("shake");
   castle.src = "castle_piskel_red.png";
 
   // Remove shake class and revert image after 1 second
+  updateHealthBar(damage);
   setTimeout(() => {
     castle.classList.remove("shake");
     castle.src = originalSrc;
   }, 500);
-
-  updateHealthBar(damage);
 }
 
 function addHealthBar(leftPercentage) {
