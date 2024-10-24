@@ -1,3 +1,4 @@
+import { getAvatarPath } from "./avatars.js";
 let isInitialized = false;
 // Function to initialize the application
 function initializeApp() {
@@ -16,10 +17,10 @@ function initializeApp() {
     console.log("Received new attack for this channel:", attack);
     spawnAnimatedGifWithText(attack);
     console.log("channel_id:", senderId);
-  });
 
-  socket.on("damage", (damage) => {
-    hurtCastle(damage.side, damage.damage);
+    setTimeout(() => {
+      hurtCastle(attack.side, attack.damage);
+    }, 5000);
   });
 
   socket.on("initialize", (session) => {
@@ -69,7 +70,8 @@ function renderCastles(name1, name2) {
 }
 
 function hurtCastle(side, damage) {
-  const castle = document.querySelector(`.castle-${side}`);
+  const castleSide = side === "left" ? "right" : "left";
+  const castle = document.querySelector(`.castle-${castleSide}`);
   const originalSrc = "castle_piskel.gif";
 
   // Add shake class and change to red castle
@@ -77,6 +79,7 @@ function hurtCastle(side, damage) {
   castle.src = "castle_piskel_red.png";
 
   // Remove shake class and revert image after 1 second
+  damage = side === "right" ? -damage : damage;
   updateHealthBar(damage);
   setTimeout(() => {
     castle.classList.remove("shake");
@@ -137,7 +140,7 @@ function spawnAnimatedGifWithText(attack) {
   textElement.innerText = attack.user_name;
 
   const gifElement = document.createElement("img");
-  gifElement.src = "walker.gif";
+  gifElement.src = getAvatarPath(attack.attack_id);
   gifElement.classList.add("animatedImage");
 
   // Flip the GIF if moving from right to left
