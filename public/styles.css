@@ -59,17 +59,25 @@ body, html {
   }
 
   .player-name-left {
-      left: -20px;
+      left: -30px;
       font-size: 40px;
       transform: rotate(-90deg);
       transform-origin: center;
+      font-family: "Pixelify Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 550;
+      font-style: normal;
   }
 
   .player-name-right {
-      right: 10px;
+      right: 0px;
       font-size: 40px;
       transform: rotate(90deg);
       transform-origin: center;
+      font-family: "Pixelify Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 550;
+      font-style: normal;
   }
 
   .health-bar {

@@ -1,14 +1,14 @@
+let isInitialized = false;
 // Function to initialize the application
 function initializeApp() {
   // Extract the sender_id from the URL
   const urlParts = window.location.pathname.split("/");
-  const senderId = urlParts[1]; // Assuming the URL is like localhost:3000/<sender_id>
+  const senderId = urlParts[1];
   console.log(senderId);
 
   // Connect to the Socket.IO server
   const socket = io("http://localhost:8000", {
-    // Adjust the server URL and port as needed
-    query: { channel: senderId }, // Send the channel (room) ID as a query parameter
+    query: { channel: senderId },
   });
 
   // Listen for the "attack" event
@@ -22,8 +22,14 @@ function initializeApp() {
     hurtCastle(damage.side, damage.damage);
   });
 
-  renderCastles("misterhup", "Atrioc");
-  addHealthBar(60);
+  socket.on("initialize", (session) => {
+    console.log(session);
+    if (!isInitialized) {
+      renderCastles(session.leftName || "Host", session.rightName || "Auto");
+      addHealthBar(session.health);
+      isInitialized = true;
+    }
+  });
 
   // Handle connection and disconnection events
   socket.on("connect", () => {
@@ -76,7 +82,7 @@ function hurtCastle(side, damage) {
     castle.src = originalSrc;
   }, 500);
 
-  updateHealthBar(-damage);
+  updateHealthBar(damage);
 }
 
 function addHealthBar(leftPercentage) {
