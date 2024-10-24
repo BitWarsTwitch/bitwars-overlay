@@ -59,10 +59,12 @@ body, html {
   }
 
   .player-name-left {
-      left: -30px;
+      position: fixed;
+      left: 20px;
+      bottom: 0px;
+      transform-origin: left top;
+      transform: rotate(-90deg) translateX(50%);
       font-size: 40px;
-      transform: rotate(-90deg);
-      transform-origin: center;
       font-family: "Pixelify Sans", sans-serif;
       font-optical-sizing: auto;
       font-weight: 550;
@@ -70,10 +72,12 @@ body, html {
   }
 
   .player-name-right {
-      right: 0px;
+      position: fixed;
+      right: 20px;
+      bottom: 0px;
+      transform-origin: right top;
+      transform: rotate(90deg) translateX(-50%);
       font-size: 40px;
-      transform: rotate(90deg);
-      transform-origin: center;
       font-family: "Pixelify Sans", sans-serif;
       font-optical-sizing: auto;
       font-weight: 550;
