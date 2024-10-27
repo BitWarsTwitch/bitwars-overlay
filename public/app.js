@@ -1,15 +1,19 @@
 import { getAvatarPath } from "./avatars.js";
+
 let isInitialized = false;
 let globalHealth = 50;
+
+const backendUrl = "https://bitwars-backend-production.up.railway.app/";
 // Function to initialize the application
 function initializeApp() {
   // Extract the sender_id from the URL
   const urlParts = window.location.pathname.split("/");
   const senderId = urlParts[1];
   console.log(senderId);
+  console.log(backendUrl);
 
   // Connect to the Socket.IO server
-  const socket = io("http://localhost:8000", {
+  const socket = io(backendUrl, {
     query: { channel: senderId },
   });
 
