@@ -26,7 +26,11 @@ body, html {
     color: white;
     font-weight: bold;
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 24px;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 550;
+    font-style: normal;
   }
   
   /* Style for the animated images (GIFs) */
@@ -153,4 +157,43 @@ body, html {
 
 .shake {
     animation: shake 0.2s ease-in-out 3;
+}
+
+/* Winner animation related styles */
+.winner-announcement {
+  position: absolute;
+  left: -100%;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 80px;
+  color: #ffb742;
+  text-shadow: 0 0 20px #ff4242;
+  transform: translateY(-50%);
+  z-index: 1000;
+  animation: slideWinner 3s forwards, glowPulse 0.5s infinite;
+}
+
+@keyframes slideWinner {
+  0% { left: -100%; }
+  100% { left: 0; }
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 20px #ff4242; }
+  50% { text-shadow: 0 0 40px #ff4242; }
+  100% { text-shadow: 0 0 20px #ff4242; }
+}
+
+.screen-shake {
+  animation: screenShake 0.2s infinite;
+}
+
+@keyframes screenShake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-10px, 10px); }
+  50% { transform: translate(10px, -10px); }
+  75% { transform: translate(-10px, -10px); }
+  100% { transform: translate(0); }
 }

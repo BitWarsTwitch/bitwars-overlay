@@ -24,6 +24,42 @@ function initializeApp() {
     }, 5000);
   });
 
+  socket.on("game_over", (result) => {
+    // Hide existing elements
+    const castles = document.querySelectorAll(".castle");
+    const playerNames = document.querySelectorAll(".player-name");
+    const animatedContainers = document.querySelectorAll(".animatedContainer");
+
+    [...castles, ...playerNames, ...animatedContainers].forEach((el) => {
+      el.style.display = "none";
+    });
+
+    // Create winner announcement
+    const winner = document.createElement("div");
+    winner.classList.add("winner-announcement");
+    winner.textContent = `${result.winner} has won!`;
+    container.appendChild(winner);
+
+    // Add screen shake
+    container.classList.add("screen-shake");
+
+    // Reset everything after animation
+    setTimeout(() => {
+      // Remove winner announcement and screen shake
+      winner.remove();
+      container.classList.remove("screen-shake");
+
+      // Show elements again
+      [...castles, ...playerNames].forEach((el) => {
+        el.style.display = "";
+      });
+
+      // Reset health to 50%
+      globalHealth = 50;
+      updateHealthBar(0);
+    }, 3000);
+  });
+
   socket.on("initialize", (session) => {
     console.log(session);
     if (!isInitialized) {
