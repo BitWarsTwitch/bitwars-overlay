@@ -3,7 +3,7 @@ import { getAvatarPath } from "./avatars.js";
 let isInitialized = false;
 let globalHealth = 50;
 
-const backendUrl = "https://bitwars-backend-production.up.railway.app/";
+const backendUrl = "https://pixelwars-backend-production.up.railway.app/";
 // Function to initialize the application
 function initializeApp() {
   // Extract the sender_id from the URL
